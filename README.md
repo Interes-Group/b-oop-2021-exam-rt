@@ -7,7 +7,7 @@ Vytvorte oknovú aplikáciu, ktorá umožní používateľovi kresliť a presúv
 2. Kreslenie jedného tvaru: strom \[15b].
 3. Presúvanie už nakreslených tvarov \[15b].
 4. Voľba farby geometrického tvaru prostredníctvom [JButton](https://docs.oracle.com/en/java/javase/11/docs/api/java.desktop/javax/swing/JButton.html) \[4b].
-5. Zatvorenie aplikácie cez tlačidlo na zatvorenie aplikácie \[1b].
+5. Zatvorenie aplikácie cez tlačidlo na zatvorenie aplikácie poskytnuté operačným systémom \[1b].
 
 ## Podrobný popis k bodu 1:
 
@@ -52,49 +52,59 @@ Okrem funkcionality budú hodnotené aj princípy Objektovo orientovaného progr
 
 Vypracovanie skúšky odovzdajte cez Github classroom do miesta odovzdania nato určenom. Odovzdáva sa obsah celého projektu. Na vypracovanie písomky je vyhradený čas 3 hodiny.
 
-# Assignment 2 - Rook in a maze
+# Exam RT \[60pts], 3.6.2021 14:00
 B-OOP 2021
 
-Your task is to create a java window application with the Swing library. The user interface of the application must consist of:
-* canvas
-* side menu (you can choose the location of this side menu freely)
+Your task is to create a java window application. The application allows the user to draw and move a given shape. The application has the following functionality (40 points):
 
-When the application starts, generate a maze using the [randomized depth first search](https://www.baeldung.com/cs/maze-generation#dfs-maze) algorithm and draw it onto the canvas.
-The grid containing the maze must be at least 11x11 tiles large (including wall tiles). The entire maze must be surrounded by walls (no paths in the maze can touch the borders of the window).
+1. Creation of the main window, that will contain control elements and a drawing area \[5pts].
+2. Drawing of one shape: a tree \[15pts].
+3. Moving of the drawn shapes \[15pts].
+4. Selection of the drawing color through a [JButton](https://docs.oracle.com/en/java/javase/11/docs/api/java.desktop/javax/swing/JButton.html) \[4pts].
+5. Closing the application with the "close window" button provided by the operating system \[1pt].
 
-In the generated maze choose in any way a starting and a goal point. Place the player figure on the starting point. The player can move their figure in 3 ways:
-* by using the arrows keys on their keyboard. Always by one tile in the specified direction. They cannot enter a tile that contains a wall.
-* by using the mouse. When the player figure is clicked, it can be moved like a rook chess piece (i.e. any number of tiles in the horizontal, or vertical directions).
-The destination is chosen by a second mouse click. Tiles that can be moved to in this manner must be highlighted, when the mouse hovers over them. When moving in this manner, the player cannot jump over walls.
-* by using buttons on the side menu, that represent the arrow keys. The rules for moving in this manner are the same, as for the movement by the arrow keys on the keyboard.
+## Description for bullet point 1:
 
-When the player reaches the goal point, the application should generate a new maze and the game starts over.
+Most of the window area will be covered by the drawing area. THe bottom part of the window will contain the control elements. The control elements consist of: [JButton](https://docs.oracle.com/en/java/javase/11/docs/api/java.desktop/javax/swing/JButton.html) "Tree", [JButton](https://docs.oracle.com/en/java/javase/11/docs/api/java.desktop/javax/swing/JButton.html) "Move", [JButton](https://docs.oracle.com/en/java/javase/11/docs/api/java.desktop/javax/swing/JButton.html) "Next color" and a [JLabel](https://docs.oracle.com/en/java/javase/11/docs/api/java.desktop/javax/swing/JLabel.html). Each of these elements should cover a fourth of the available space for control elements.
 
-The side menu must contain:
-* a counter of successfully completed mazes
-* a button that resets the counter and generates a new maze
-* buttons representing the arrow keys, which can be used to move the player. These buttons must be placed in the same way, they are placed on a regular keyboard.
+## Description for bullet point 2:
 
+By pressing the appropriate button we select drawing of the TREE [5pts]. After pressing the left mouse button and draging the mouse the selected shape will begin drawing on to the drawing area. The label (from the control elements) will have its text changed to **DRAWING**. Based on the current position of the mouse, the width and height of the drawn shape will be dynamically adjusted. After letting go of the left mouse button the drawing of the shape will complete, i.e. its position and size fill be fixed. The drawn shape must remain on the drawing area after drawing additional shapes. Each shape must maintain its color (the color will change based on a button, see bullet point 4). The tree shape must maintain the proportions depicted on the image bellow.
 
+![image](./strom.svg)
+
+**Note:** When drawing (dragging the mouse) a shape the position and direction of the mouse must be considered. You must consider how to calculate the position and size of the selected shape. If you implement the drawing of the shape into all four direction the mouse can be dragged in (top right to bottom left, bottom left to top right, top left to bottom right, bottom right to top left) you will receive the full [10pts]. If you do not implement all four possibilities you will be able to recive at most a half of the available points (max 5pts).
+
+## Description for bullet point 3:
+
+By pressing the appropriate button the **MOVING** mode will be selected and the appropriate text of the label (in the controll panel) will be set. After pressing the left mouse button on an already drawn shape and then dragging the mouse, the selected shape will move with the mouse. After letting go of the left mouse button the movement of the shape will finish i.e. the shape will remain fixed in its new place. THe dragged shape will be drawn only at the position of the mouse and will not remain at its original location.
+
+**Note:** When moving (dragging the mouse) of a selected shape you must consider the relative position of the mouse to the moved shape. For implementing the dragging in any way at most 10pts can be received. If the movement is performed relative to the click location of the mouse (i.e. when dragging from the center of the shape the mouse remains in the center of the shape during the movement) you will receive the full 15pts.
+
+You can use the [contains](https://docs.oracle.com/en/java/javase/11/docs/api/java.desktop/java/awt/Shape.html#contains(double,double)) method of the [Shape](https://docs.oracle.com/en/java/javase/11/docs/api/java.desktop/java/awt/Shape.html) class to determine whether the mouse was pressed inside of a shape.
+
+## Description for bullet point 4:
+
+Among the control elements the Button "Next color" will serve the purpose of selecting the drawing color. The Lable will display the currently selected color. The program allows the selection of at least 3 different colors in some fixed order (e.g. red > blue > green). By pressing the button the selected color will change to the next color in the ordering. If the currently selected color is the last color in the ordering, the next color is the first color of the ordering (i.e. red > blue > green > red > ...). The currently drawn shapes have the currently selected color. You can choose the available colors freely, but they must be clearly visible on the drawing area. After selecting a color the color of the Label will change based on the currently selected color. The change of the color affect only new shapes, the shapes that are already drawn must maintain their color!
 
 ## Grading
-You can get 15 points for this assignment. **The program must be able to compile, otherwise 0 points are given for the assigment**.
-The github pipeline checks whether the program can be compiled. The main focus during grading is put on object-oriented approach and OOP principles used by the solution.
-Including, but not limited to:
-* appropriate naming of classes, methods and variables in a single language (class names starting with a capital letter, method names starting with a lowercase letter),
-* appropriate use of access modifiers (public, private, or protected) when restricting access to class methods and attributes,
-* the use of inheritance and polymorphism,
-* usage of exceptions when handling undesired behavior (do not catch or throw the instances of the generic Exception class),
-* don't use nested classes,
-* don't use static methods, or non-constant static variables (you don't need them to complete the assignment),
-* don't put any logic into the main method and its class. The main method should only be used to create a new object,
-* you can use the lombok library and its annotations in your solution. The neccessary dependency is already present in the _pom.xml_ file.
+
+The project contains a github pipeline, that checks whether it can be compiled or not. **If the program cannot be compiled it will not be graded and 0 points will be received for the exam!**.
+
+Appart from the functionality, the principles of Object-Oriented Programming will be graded as well (20 pts), pay close attention especially to:
+
+* correct usage of access modifiers, \[3pts]
+* appropriate naming of classes and methods, \[3pts]
+* appropriate usage of inheritance and polymorphism, \[3pts]
+* appropriate usage of exceptions when handling undesired behavior (do not catch or throw the instances of the generic Exception class), \[3pts]
+* don't use nested classes, \[2pts]
+* don't use static methods, or non-constant static variables, \[3pts]
+* don't have code duplication \[3pts]
+
+## Odovzdanie
+
+Vypracovanie skúšky odovzdajte cez Github classroom do miesta odovzdania nato určenom. Odovzdáva sa obsah celého projektu. Na vypracovanie písomky je vyhradený čas 3 hodiny.
 
 ## Handing in the assigment
-Clone the assignment from the repository created from this template by the provided link trough GitHub Classroom (if you create your own repository with the "use this template" button, we won't be able to see your repository and we won't be able to grade it!). Upload your solutions to your repository using the Git version control system (git commit + git push).
-Make sure, that your repository was created under the **Interes-Group** group, otherwise we won't be able to access your repository, and the assignment will not be graded.
-You can push commits to the repository while you work - you don't have to push everything at once. Only the code in the _master_ branch will be graded. You have until **23.4.2021 23:00** to complete the assignment.
 
-Only edit files in the _src/main_ folder or its sub-folders. You mustn't change any other files in the repository (especially the _pom.xml_ file, and the github pipeline files).
-
-You have to have your name set in your github account (settings > profile > name), so that we can match students with their assignments. **If we are unable to match a student with their assignment, the student will receive 0 points for the assignment!**
+Hand in the assignment into your Github classroom repository for this exam. Hand in the entire project. You have 3 hours to complete the exam.
