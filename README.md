@@ -38,6 +38,8 @@ Spomedzi ovládacích prvkov bude Button "Ďalšia farba" slúžiť na výber fa
 
 Projekt obsahuje github pipeline, ktorá kontroluje skompilovateľnosť programu. **Pokiaľ program nie je skompilovateľný nebude hodnotený a skúška bude hodnotená 0b!**
 
+**Pokiaľ budete počas skúšky pristihnutý pri podvádzaní, alebo bude váš kód vykazovať príliš veľkú podobnosť s kódom iných študentov, bude skúška hodnotená 0 bodmi!**
+
 Okrem funkcionality budú hodnotené aj princípy Objektovo orientovaného programovania (20 bodov), najmä:
 
 * správne využitie modifikátory prístupu, \[3b]
@@ -90,6 +92,8 @@ Among the control elements the Button "Next color" will serve the purpose of sel
 ## Grading
 
 The project contains a github pipeline, that checks whether it can be compiled or not. **If the program cannot be compiled it will not be graded and 0 points will be received for the exam!**.
+
+**If you are caught cheating during the exam, or if the source code handed in by you will have a suspicious amount of similarities with the code of other students 0 points will be received for the exam!**
 
 Appart from the functionality, the principles of Object-Oriented Programming will be graded as well (20 pts), pay close attention especially to:
 
